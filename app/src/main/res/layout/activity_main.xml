@@ -23,7 +23,7 @@
         />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/stat_recyclerView"
+        android:id="@+id/canada_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/stat_text"
