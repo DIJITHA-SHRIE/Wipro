@@ -1,7 +1,8 @@
-package com.example.innovat
+package com.example.innovat.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.innovat.R
 
 class MainActivity : AppCompatActivity() {
 
