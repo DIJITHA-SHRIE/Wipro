@@ -20,9 +20,14 @@ class MainActivity : AppCompatActivity() {
 
     private val canadaViewModel: CanadaViewModel by viewModel()
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val actionBar = supportActionBar
+
 
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
@@ -39,6 +44,12 @@ class MainActivity : AppCompatActivity() {
         canadaViewModel.canadaResponseData.observe(this, Observer(function = fun(canadaList:  DataResponse?) {
             canadaList?.let {
                 binding.progressBar.visibility = View.GONE
+                actionBar!!.title = canadaList.title
+
+                var dataAdapter: DataAdapter = DataAdapter(canadaList.rows,applicationContext)
+                binding.canadaRecyclerView.adapter = dataAdapter
+
+
 
             }
         }))
