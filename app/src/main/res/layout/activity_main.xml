@@ -23,14 +23,20 @@
         android:textColor="@color/black"
         android:visibility="gone"
         />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/stat_text">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/canada_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/stat_text"
+
         android:layout_margin="3dp"
         />
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/progressBar"
