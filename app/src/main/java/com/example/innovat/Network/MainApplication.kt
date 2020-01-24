@@ -3,13 +3,15 @@ package com.example.innovat.Network
 import android.app.Application
 import org.koin.android.ext.android.startKoin
 
-class MainApplication: Application() {
+class MainApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin(this,
+        startKoin(
+            this,
             listOf(mainModule),
-            loadPropertiesFromFile = true)
+            loadPropertiesFromFile = true
+        )
     }
 
 }

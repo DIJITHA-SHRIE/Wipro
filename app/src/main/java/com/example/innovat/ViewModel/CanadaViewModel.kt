@@ -43,4 +43,11 @@ class CanadaViewModel(val dataRepository: DataRepository): ViewModel(), KoinComp
 
     }
 
+
+
+    fun refreshUsers() {
+        canadaResponseData.value
+        getCanadaData()
+    }
+
 }

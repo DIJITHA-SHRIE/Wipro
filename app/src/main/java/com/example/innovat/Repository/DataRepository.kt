@@ -6,7 +6,7 @@ import retrofit2.Call
 import retrofit2.Response
 import java.lang.Exception
 
-class DataRepository (val networkApi: NetworkApi) {
+class DataRepository(val networkApi: NetworkApi) {
 
     fun fetchStatData(canadaData: CanadaData) {
         networkApi.getCanadaApi().enqueue(object : retrofit2.Callback<DataResponse> {
