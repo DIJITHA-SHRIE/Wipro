@@ -19,7 +19,9 @@ class DataRepository(val networkApi: NetworkApi) {
                 try {
                     canadaData.onSuccess(response.body() as DataResponse)
                 } catch (e: Exception) {
-                    canadaData.onToast("Url Not Found!! please try after sometime")
+                    //canadaData.onToast("Url Not Found!! please try after sometime")
+                    canadaData.onToast(e.message.toString())
+
                 }
 
 

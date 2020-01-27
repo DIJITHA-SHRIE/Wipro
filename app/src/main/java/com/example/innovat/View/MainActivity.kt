@@ -12,6 +12,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.innovat.Database.AppDatabase
+import com.example.innovat.Database.RoomUser
 import com.example.innovat.Model.DataResponse
 import com.example.innovat.R
 import com.example.innovat.ViewModel.CanadaViewModel
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private val canadaViewModel: CanadaViewModel by viewModel()
 
     private val PREF_NAME = "DATASTORAGE"
+
+
 
 
     var gson = Gson()
@@ -70,19 +74,26 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                         binding.swipeRefresh.isRefreshing = false
                         actionBar!!.title = canadaList.title
 
-
+/*
                         val editor: SharedPreferences.Editor = sharedPref.edit()
 
                         var jsonString = gson.toJson(canadaList)
                         editor.putString("OFFLINESTORAGE", jsonString)
                         editor.putString("sample", "sample")
                         editor.apply()
-                        editor.commit()
+                        editor.commit()*/
 
 
                         var dataAdapter: DataAdapter =
                             DataAdapter(canadaList.rows, applicationContext)
                         binding.canadaRecyclerView.adapter = dataAdapter
+
+                        val  roomUser = RoomUser(0,canadaList.title,canadaList.rows)
+                        val db = AppDatabase(this)
+                        db.userDao().insertAll(roomUser)
+
+                        Log.i("RommValues",db.userDao().getAll().title)
+
 
 
                     }
@@ -93,6 +104,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 if (res != null) {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(applicationContext, res, Toast.LENGTH_LONG).show()
+                    Log.i("RoomErr",res)
                 }
 
             })
@@ -108,6 +120,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                     "No Internet Available, please try to connect  once to store offline ",
                     Toast.LENGTH_LONG
                 ).show()
+
+
             } else {
                 val dataResponseStr = gson.fromJson(json, DataResponse::class.java)
 
