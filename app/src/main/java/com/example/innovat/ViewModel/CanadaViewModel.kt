@@ -6,8 +6,12 @@ import androidx.lifecycle.ViewModel
 import com.example.innovat.Model.DataResponse
 import com.example.innovat.Repository.DataRepository
 import org.koin.standalone.KoinComponent
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
-class CanadaViewModel(val dataRepository: DataRepository): ViewModel(), KoinComponent {
+
+
+  class CanadaViewModel(val dataRepository: DataRepository): ViewModel(), KoinComponent {
+
 
     var canadaResponseData = MutableLiveData<DataResponse>()
 
@@ -15,8 +19,7 @@ class CanadaViewModel(val dataRepository: DataRepository): ViewModel(), KoinComp
 
 
     init {
-        canadaResponseData.value
-        toastError.value
+       refreshUsers()
     }
 
 
@@ -47,7 +50,13 @@ class CanadaViewModel(val dataRepository: DataRepository): ViewModel(), KoinComp
 
     fun refreshUsers() {
         canadaResponseData.value
+        toastError.value
         getCanadaData()
+    }
+
+    fun getCanadaDetailsOrie():MutableLiveData<DataResponse>{
+        return canadaResponseData
+
     }
 
 }

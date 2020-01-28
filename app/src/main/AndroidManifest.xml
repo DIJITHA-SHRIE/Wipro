@@ -16,6 +16,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".View.MainActivity"></activity>
         <activity android:name=".View.CallFragmentActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

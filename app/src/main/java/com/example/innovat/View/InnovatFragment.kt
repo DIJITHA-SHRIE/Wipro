@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.innovat.Database.AppDatabase
@@ -69,6 +68,7 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_innovat, container, false)
         binding.setLifecycleOwner(this)
 
+
         db = AppDatabase(activity!!)
 
         binding.canadaRecyclerView!!.layoutManager = LinearLayoutManager(
@@ -85,21 +85,18 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
         // check the internet connection
         if (isOnline(activity!!)) {
 
-
             canadaViewModel.getCanadaData()
             // binding.progressBar.visibility = View.VISIBLE
             binding.swipeRefresh.isRefreshing = true
 
-            canadaViewModel.canadaResponseData.observe(
-                this,
+            canadaViewModel.getCanadaDetailsOrie().observe(
+                viewLifecycleOwner,
                 Observer(function = fun(canadaList: DataResponse?) {
                     canadaList?.let {
                         // binding.progressBar.visibility = View.GONE
 
                         binding.swipeRefresh.isRefreshing = false
-
-
-
+                        getActivity()!!.title = canadaList.title
 
                         var dataAdapter: DataAdapter =
                             DataAdapter(canadaList.rows, activity!!)
@@ -123,7 +120,7 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
                 })
             )
 
-            canadaViewModel.toastError.observe(this, Observer { res ->
+            canadaViewModel.toastError.observe(viewLifecycleOwner, Observer { res ->
                 if (res != null) {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(activity, res, Toast.LENGTH_LONG).show()
@@ -142,6 +139,7 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
 
                 roomUser = db.userDao().getAll()
                 Log.i("getAllRoom", roomUser.title)
+                getActivity()!!.title = roomUser.title
 
 
                 var dataAdapter: DataAdapter = DataAdapter(roomUser.rows, activity!!)
