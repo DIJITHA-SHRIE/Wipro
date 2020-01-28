@@ -1,29 +1,49 @@
 package com.example.innovat.View
 
+import android.app.Activity
 import android.content.Context
-import android.content.SharedPreferences
 import android.net.ConnectivityManager
-import androidx.appcompat.app.AppCompatActivity
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.innovat.Database.AppDatabase
 import com.example.innovat.Model.DataResponse
+
 import com.example.innovat.R
 import com.example.innovat.ViewModel.CanadaViewModel
-import com.example.innovat.databinding.ActivityMainBinding
-import com.google.gson.Gson
+import com.example.innovat.databinding.FragmentInnovatBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
-class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
+// TODO: Rename parameter arguments, choose names that match
+// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+private const val ARG_PARAM1 = "param1"
+private const val ARG_PARAM2 = "param2"
 
+/**
+ * A simple [Fragment] subclass.
+ * Activities that contain this fragment must implement the
+ * [InnovatFragment.OnFragmentInteractionListener] interface
+ * to handle interaction events.
+ * Use the [InnovatFragment.newInstance] factory method to
+ * create an instance of this fragment.
+ */
+class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+    private var listener: OnFragmentInteractionListener? = null
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: FragmentInnovatBinding
 
     private val canadaViewModel: CanadaViewModel by viewModel()
 
@@ -31,24 +51,28 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var roomUser: DataResponse
     private lateinit var db: AppDatabase
 
-
-    var gson = Gson()
-
+    var activity = getActivity() as? Context
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+    }
 
-        val actionBar = supportActionBar
-        val sharedPref: SharedPreferences =
-            this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
-
-        db = AppDatabase(this)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_innovat, container, false)
         binding.setLifecycleOwner(this)
 
+        db = AppDatabase(activity!!)
+
         binding.canadaRecyclerView!!.layoutManager = LinearLayoutManager(
-            this,
+            activity,
             LinearLayoutManager.VERTICAL, false
         )
         binding.swipeRefresh.setOnRefreshListener(this)
@@ -59,7 +83,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             android.R.color.holo_blue_dark
         )
         // check the internet connection
-        if (isOnline(applicationContext)) {
+        if (isOnline(activity!!)) {
+
 
             canadaViewModel.getCanadaData()
             // binding.progressBar.visibility = View.VISIBLE
@@ -72,21 +97,12 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                         // binding.progressBar.visibility = View.GONE
 
                         binding.swipeRefresh.isRefreshing = false
-                        actionBar!!.title = canadaList.title
 
-                        // uncomment to store data in sharedpreference
-                        /*
-                        val editor: SharedPreferences.Editor = sharedPref.edit()
 
-                        var jsonString = gson.toJson(canadaList)
-                        editor.putString("OFFLINESTORAGE", jsonString)
-                        editor.putString("sample", "sample")
-                        editor.apply()
-                        editor.commit()*/
 
 
                         var dataAdapter: DataAdapter =
-                            DataAdapter(canadaList.rows, applicationContext)
+                            DataAdapter(canadaList.rows, activity!!)
                         binding.canadaRecyclerView.adapter = dataAdapter
 
 
@@ -110,7 +126,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
             canadaViewModel.toastError.observe(this, Observer { res ->
                 if (res != null) {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(applicationContext, res, Toast.LENGTH_LONG).show()
+                    Toast.makeText(activity, res, Toast.LENGTH_LONG).show()
                     Log.i("RoomErr", res)
                 }
 
@@ -120,25 +136,6 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
             binding.progressBar.visibility = View.GONE
 
-            // uncomment to retrive data from sharedpreference
-
-            /*  val json = sharedPref.getString("OFFLINESTORAGE", "")
-              if (json.equals("") || json == null) {
-                  Toast.makeText(
-                      applicationContext,
-                      "No Internet Available, please try to connect  once to store offline ",
-                      Toast.LENGTH_LONG
-                  ).show()
-
-
-              } else {
-                  val dataResponseStr = gson.fromJson(json, DataResponse::class.java)
-
-                  actionBar!!.title = dataResponseStr.title
-
-                  var dataAdapter: DataAdapter = DataAdapter(dataResponseStr.rows, applicationContext)
-                  binding.canadaRecyclerView.adapter = dataAdapter
-              }*/
 
             if (db != null && db.userDao().getCount() > 0) {
                 Log.i("RoomCount", db.userDao().getCount().toString())
@@ -146,9 +143,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 roomUser = db.userDao().getAll()
                 Log.i("getAllRoom", roomUser.title)
 
-                actionBar!!.title = roomUser.title
 
-                var dataAdapter: DataAdapter = DataAdapter(roomUser.rows, applicationContext)
+                var dataAdapter: DataAdapter = DataAdapter(roomUser.rows, activity!!)
                 binding.canadaRecyclerView.adapter = dataAdapter
 
             } else {
@@ -157,9 +153,12 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
         }
 
+
+
+        return binding.root
     }
 
-    // call  internet connection
+
     fun isOnline(context: Context): Boolean {
         val connectivityManager =
             context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -168,7 +167,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        if (isOnline(applicationContext)) {
+        if (isOnline(activity!!)) {
             canadaViewModel.refreshUsers()
         } else {
             binding.swipeRefresh.isRefreshing = false
@@ -177,4 +176,56 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     }
 
+
+    // TODO: Rename method, update argument and hook method into UI event
+    fun onButtonPressed(uri: Uri) {
+        listener?.onFragmentInteraction(uri)
+    }
+
+   override fun onAttach(context: Context) {
+        super.onAttach(context)
+       activity = context
+
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        listener = null
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     *
+     *
+     * See the Android Training lesson [Communicating with Other Fragments]
+     * (http://developer.android.com/training/basics/fragments/communicating.html)
+     * for more information.
+     */
+    interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        fun onFragmentInteraction(uri: Uri)
+    }
+
+    companion object {
+        /**
+         * Use this factory method to create a new instance of
+         * this fragment using the provided parameters.
+         *
+         * @param param1 Parameter 1.
+         * @param param2 Parameter 2.
+         * @return A new instance of fragment InnovatFragment.
+         */
+        // TODO: Rename and change types and number of parameters
+        @JvmStatic
+        fun newInstance(param1: String, param2: String) =
+            InnovatFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARG_PARAM1, param1)
+                    putString(ARG_PARAM2, param2)
+                }
+            }
+    }
 }
