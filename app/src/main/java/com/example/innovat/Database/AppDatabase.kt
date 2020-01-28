@@ -7,10 +7,11 @@ import androidx.room.RoomDatabase
 
 import androidx.room.Database
 import androidx.room.TypeConverters
+import com.example.innovat.Model.DataResponse
 
 
 @Database(
-    entities = [RoomUser::class],
+    entities = [DataResponse::class],
     version = 1
 )
 @TypeConverters(DataTypeConverter::class)

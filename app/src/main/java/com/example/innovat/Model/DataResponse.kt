@@ -1,8 +1,17 @@
 package com.example.innovat.Model
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import java.io.Serializable
 
+
+@Entity(tableName = "canada_offline_storage")
 data class DataResponse (
-    var title:String,
-    var rows:ArrayList<RowResponse>
+    @PrimaryKey(autoGenerate = true)
+    var id: Int,
+
+    @ColumnInfo(name = "title") var title:String,
+
+    @ColumnInfo(name = "rows") var rows:ArrayList<RowResponse>
 ): Serializable

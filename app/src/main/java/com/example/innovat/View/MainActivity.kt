@@ -29,8 +29,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
     private val canadaViewModel: CanadaViewModel by viewModel()
 
     private val PREF_NAME = "DATASTORAGE"
-
-
+    private lateinit var roomUser: DataResponse
+    private lateinit var db: AppDatabase
 
 
     var gson = Gson()
@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         val sharedPref: SharedPreferences =
             this.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
 
-
+        db = AppDatabase(this)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.setLifecycleOwner(this)
 
@@ -71,10 +71,12 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 Observer(function = fun(canadaList: DataResponse?) {
                     canadaList?.let {
                         // binding.progressBar.visibility = View.GONE
+
                         binding.swipeRefresh.isRefreshing = false
                         actionBar!!.title = canadaList.title
 
-/*
+                        // uncomment to store data in sharedpreference
+                        /*
                         val editor: SharedPreferences.Editor = sharedPref.edit()
 
                         var jsonString = gson.toJson(canadaList)
@@ -88,14 +90,21 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                             DataAdapter(canadaList.rows, applicationContext)
                         binding.canadaRecyclerView.adapter = dataAdapter
 
-                        val  roomUser = RoomUser(0,canadaList.title,canadaList.rows)
-                        val db = AppDatabase(this)
-                        db.userDao().insertAll(roomUser)
 
-                        Log.i("RommValues",db.userDao().getAll().title)
+                        // store data in room
 
+                        if (db != null && db.userDao().getCount() > 0) {
+                        db.userDao().updateTodo(canadaList.title,canadaList.rows,1)
+                            Log.i("RommUpdateValues", db.userDao().getAll().title)
 
+                    }
+                        else{
+                            roomUser = DataResponse(0, canadaList.title, canadaList.rows)
 
+                            db.userDao().insertAll(roomUser)
+
+                            Log.i("RommValues", db.userDao().getAll().title)
+                        }
                     }
                 })
             )
@@ -104,7 +113,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
                 if (res != null) {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(applicationContext, res, Toast.LENGTH_LONG).show()
-                    Log.i("RoomErr",res)
+                    Log.i("RoomErr", res)
                 }
 
             })
@@ -113,24 +122,40 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
             binding.progressBar.visibility = View.GONE
 
-            val json = sharedPref.getString("OFFLINESTORAGE", "")
-            if (json.equals("") || json == null) {
-                Toast.makeText(
-                    applicationContext,
-                    "No Internet Available, please try to connect  once to store offline ",
-                    Toast.LENGTH_LONG
-                ).show()
+            // uncomment to retrive data from sharedpreference
 
+            /*  val json = sharedPref.getString("OFFLINESTORAGE", "")
+              if (json.equals("") || json == null) {
+                  Toast.makeText(
+                      applicationContext,
+                      "No Internet Available, please try to connect  once to store offline ",
+                      Toast.LENGTH_LONG
+                  ).show()
+
+
+              } else {
+                  val dataResponseStr = gson.fromJson(json, DataResponse::class.java)
+
+                  actionBar!!.title = dataResponseStr.title
+
+                  var dataAdapter: DataAdapter = DataAdapter(dataResponseStr.rows, applicationContext)
+                  binding.canadaRecyclerView.adapter = dataAdapter
+              }*/
+
+            if (db != null && db.userDao().getCount() > 0) {
+                Log.i("RoomCount", db.userDao().getCount().toString())
+
+               roomUser = db.userDao().getAll()
+                Log.i("getAllRoom",roomUser.title)
+
+                actionBar!!.title = roomUser.title
+
+                var dataAdapter: DataAdapter = DataAdapter(roomUser.rows, applicationContext)
+                binding.canadaRecyclerView.adapter = dataAdapter
 
             } else {
-                val dataResponseStr = gson.fromJson(json, DataResponse::class.java)
-
-                actionBar!!.title = dataResponseStr.title
-
-                var dataAdapter: DataAdapter = DataAdapter(dataResponseStr.rows, applicationContext)
-                binding.canadaRecyclerView.adapter = dataAdapter
+                Log.i("RoomCountError", "Error")
             }
-
 
         }
 
