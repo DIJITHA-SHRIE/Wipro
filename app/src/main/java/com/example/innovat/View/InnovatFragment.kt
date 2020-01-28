@@ -147,6 +147,11 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
 
             } else {
                 Log.i("RoomCountError", "Error")
+                Toast.makeText(
+                    activity,
+                    "No Internet Available, please try to connect  once to store offline ",
+                    Toast.LENGTH_LONG
+                ).show()
             }
 
         }
