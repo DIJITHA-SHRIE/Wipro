@@ -11,7 +11,7 @@ import kotlin.collections.ArrayList
 
 
 class DataTypeConverter {
-     val gson = Gson()
+    val gson = Gson()
     @TypeConverter
     fun stringToList(data: String?): ArrayList<RowResponse> {
         if (data == null) {

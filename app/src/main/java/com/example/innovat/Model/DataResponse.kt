@@ -7,11 +7,11 @@ import java.io.Serializable
 
 
 @Entity(tableName = "canada_offline_storage")
-data class DataResponse (
+data class DataResponse(
     @PrimaryKey(autoGenerate = true)
     var id: Int,
 
-    @ColumnInfo(name = "title") var title:String,
+    @ColumnInfo(name = "title") var title: String,
 
-    @ColumnInfo(name = "rows") var rows:ArrayList<RowResponse>
-): Serializable
+    @ColumnInfo(name = "rows") var rows: ArrayList<RowResponse>
+) : Serializable

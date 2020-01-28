@@ -49,19 +49,19 @@ class CanadaViewModel(val dataRepository: DataRepository) : ViewModel(), KoinCom
 
 
     fun callUsers() {
-        canadaResponseData =  MutableLiveData<DataResponse>()
+        canadaResponseData = MutableLiveData<DataResponse>()
         toastError = MutableLiveData<String>()
-        if(canadaResponseData.value == null){
+        if (canadaResponseData.value == null) {
 
-        getCanadaData()}
-        else{
+            getCanadaData()
+        } else {
             val oldValue = canadaResponseData.value
             canadaResponseData.value = oldValue
         }
 
     }
 
-    fun refreshUser(){
+    fun refreshUser() {
         getCanadaData()
     }
 

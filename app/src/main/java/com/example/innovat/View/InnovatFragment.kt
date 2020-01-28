@@ -150,12 +150,6 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_innovat, container, false)
         binding.setLifecycleOwner(this)
-
-
-
-
-
-
         db = AppDatabase(activity!!)
 
         binding.canadaRecyclerView!!.layoutManager = LinearLayoutManager(
