@@ -10,8 +10,9 @@ class CallFragmentActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_call_fragment)
 
+        if(savedInstanceState == null){
         val fragment = InnovatFragment()
-        supportFragmentManager.beginTransaction().add(R.id.details_fragment, fragment).commit()
+        supportFragmentManager.beginTransaction().add(R.id.details_fragment, fragment).commit()}
 
     }
 }

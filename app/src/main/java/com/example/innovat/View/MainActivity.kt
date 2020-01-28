@@ -18,6 +18,7 @@ import com.example.innovat.R
 import com.example.innovat.ViewModel.CanadaViewModel
 import com.example.innovat.databinding.ActivityMainBinding
 import com.google.gson.Gson
+import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val canadaViewModel: CanadaViewModel by viewModel()
+    lateinit var canadaViewModel: CanadaViewModel
 
     private val PREF_NAME = "DATASTORAGE"
     private lateinit var roomUser: DataResponse
@@ -47,6 +48,8 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         binding.setLifecycleOwner(this)
 
+        canadaViewModel = getViewModel<CanadaViewModel>()
+
         binding.canadaRecyclerView!!.layoutManager = LinearLayoutManager(
             this,
             LinearLayoutManager.VERTICAL, false
@@ -61,7 +64,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
         // check the internet connection
         if (isOnline(applicationContext)) {
 
-            canadaViewModel.getCanadaData()
+
             // binding.progressBar.visibility = View.VISIBLE
             binding.swipeRefresh.isRefreshing = true
 
@@ -169,7 +172,7 @@ class MainActivity : AppCompatActivity(), SwipeRefreshLayout.OnRefreshListener {
 
     override fun onRefresh() {
         if (isOnline(applicationContext)) {
-            canadaViewModel.refreshUsers()
+            canadaViewModel.refreshUser()
         } else {
             binding.swipeRefresh.isRefreshing = false
         }

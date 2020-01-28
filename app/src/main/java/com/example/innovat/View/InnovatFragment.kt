@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.innovat.Database.AppDatabase
@@ -21,6 +22,7 @@ import com.example.innovat.Model.DataResponse
 import com.example.innovat.R
 import com.example.innovat.ViewModel.CanadaViewModel
 import com.example.innovat.databinding.FragmentInnovatBinding
+import org.koin.android.viewmodel.ext.android.getViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,55 +39,11 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-    private var listener: OnFragmentInteractionListener? = null
-
-    private lateinit var binding: FragmentInnovatBinding
-
-    private val canadaViewModel: CanadaViewModel by viewModel()
-
-    private val PREF_NAME = "DATASTORAGE"
-    private lateinit var roomUser: DataResponse
-    private lateinit var db: AppDatabase
-
-    var activity = getActivity() as? Context
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_innovat, container, false)
-        binding.setLifecycleOwner(this)
-
-
-        db = AppDatabase(activity!!)
-
-        binding.canadaRecyclerView!!.layoutManager = LinearLayoutManager(
-            activity,
-            LinearLayoutManager.VERTICAL, false
-        )
-        binding.swipeRefresh.setOnRefreshListener(this)
-        binding.swipeRefresh.setColorSchemeResources(
-            R.color.colorPrimary,
-            android.R.color.holo_green_dark,
-            android.R.color.holo_orange_dark,
-            android.R.color.holo_blue_dark
-        )
-        // check the internet connection
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
         if (isOnline(activity!!)) {
 
-            canadaViewModel.getCanadaData()
+
             // binding.progressBar.visibility = View.VISIBLE
             binding.swipeRefresh.isRefreshing = true
 
@@ -155,6 +113,64 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
             }
 
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    // TODO: Rename and change types of parameters
+    private var param1: String? = null
+    private var param2: String? = null
+    private var listener: OnFragmentInteractionListener? = null
+
+    private lateinit var binding: FragmentInnovatBinding
+
+    lateinit var canadaViewModel: CanadaViewModel
+
+    private val PREF_NAME = "DATASTORAGE"
+    private lateinit var roomUser: DataResponse
+    private lateinit var db: AppDatabase
+
+    var activity = getActivity() as? Context
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            param1 = it.getString(ARG_PARAM1)
+            param2 = it.getString(ARG_PARAM2)
+        }
+        canadaViewModel = getViewModel<CanadaViewModel>()
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_innovat, container, false)
+        binding.setLifecycleOwner(this)
+
+
+
+
+
+
+        db = AppDatabase(activity!!)
+
+        binding.canadaRecyclerView!!.layoutManager = LinearLayoutManager(
+            activity,
+            LinearLayoutManager.VERTICAL, false
+        )
+        binding.swipeRefresh.setOnRefreshListener(this)
+        binding.swipeRefresh.setColorSchemeResources(
+            R.color.colorPrimary,
+            android.R.color.holo_green_dark,
+            android.R.color.holo_orange_dark,
+            android.R.color.holo_blue_dark
+        )
+        // check the internet connection
+
 
 
 
@@ -171,7 +187,7 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
 
     override fun onRefresh() {
         if (isOnline(activity!!)) {
-            canadaViewModel.refreshUsers()
+            canadaViewModel.refreshUser()
         } else {
             binding.swipeRefresh.isRefreshing = false
         }

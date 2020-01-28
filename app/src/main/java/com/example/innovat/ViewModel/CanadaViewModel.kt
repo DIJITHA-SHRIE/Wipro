@@ -7,19 +7,19 @@ import com.example.innovat.Model.DataResponse
 import com.example.innovat.Repository.DataRepository
 import org.koin.standalone.KoinComponent
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.lifecycle.LiveData
 
 
+class CanadaViewModel(val dataRepository: DataRepository) : ViewModel(), KoinComponent {
 
-  class CanadaViewModel(val dataRepository: DataRepository): ViewModel(), KoinComponent {
 
+    lateinit var canadaResponseData: MutableLiveData<DataResponse>
 
-    var canadaResponseData = MutableLiveData<DataResponse>()
-
-    var toastError = MutableLiveData<String>()
-
+    lateinit var toastError: MutableLiveData<String>
 
     init {
-       refreshUsers()
+
+        callUsers()
     }
 
 
@@ -30,6 +30,7 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
             override fun onSuccess(data: DataResponse) {
 
                 canadaResponseData.value = data
+
 
             }
 
@@ -47,14 +48,25 @@ import android.icu.lang.UCharacter.GraphemeClusterBreak.T
     }
 
 
+    fun callUsers() {
+        canadaResponseData =  MutableLiveData<DataResponse>()
+        toastError = MutableLiveData<String>()
+        if(canadaResponseData.value == null){
 
-    fun refreshUsers() {
-        canadaResponseData.value
-        toastError.value
+        getCanadaData()}
+        else{
+            val oldValue = canadaResponseData.value
+            canadaResponseData.value = oldValue
+        }
+
+    }
+
+    fun refreshUser(){
         getCanadaData()
     }
 
-    fun getCanadaDetailsOrie():MutableLiveData<DataResponse>{
+    fun getCanadaDetailsOrie(): MutableLiveData<DataResponse> {
+
         return canadaResponseData
 
     }
