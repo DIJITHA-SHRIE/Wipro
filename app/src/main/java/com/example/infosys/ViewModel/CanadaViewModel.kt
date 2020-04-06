@@ -1,13 +1,11 @@
-package com.example.innovat.ViewModel
+package com.example.infosys.ViewModel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.innovat.Model.DataResponse
-import com.example.innovat.Repository.DataRepository
+import com.example.infosys.Model.DataResponse
+import com.example.infosys.Repository.DataRepository
 import org.koin.standalone.KoinComponent
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import androidx.lifecycle.LiveData
 
 
 class CanadaViewModel(val dataRepository: DataRepository) : ViewModel(), KoinComponent {

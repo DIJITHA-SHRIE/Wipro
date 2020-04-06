@@ -1,16 +1,15 @@
-package com.example.innovat.View
+package com.example.infosys.View
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.innovat.Model.RowResponse
-import com.example.innovat.R
-import com.example.innovat.databinding.AdapterLayBinding
+import com.example.infosys.Model.RowResponse
+import com.example.infosys.R
+import com.example.infosys.databinding.AdapterLayBinding
 
 class DataAdapter(val items: ArrayList<RowResponse>, val context: Context) :
     RecyclerView.Adapter<DataViewHolder>() {

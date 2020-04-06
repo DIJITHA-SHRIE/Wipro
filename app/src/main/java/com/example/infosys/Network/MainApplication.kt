@@ -1,4 +1,4 @@
-package com.example.innovat.Network
+package com.example.infosys.Network
 
 import android.app.Application
 import org.koin.android.ext.android.startKoin

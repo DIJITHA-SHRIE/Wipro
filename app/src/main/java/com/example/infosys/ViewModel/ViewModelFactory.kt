@@ -1,8 +1,8 @@
-package com.example.innovat.ViewModel
+package com.example.infosys.ViewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.innovat.Repository.DataRepository
+import com.example.infosys.Repository.DataRepository
 
 class ViewModelFactory(   // We need to create instances of below dependencies to create instance of ViewModelFactory
     private val repository: DataRepository

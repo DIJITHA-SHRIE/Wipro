@@ -1,6 +1,5 @@
-package com.example.innovat.View
+package com.example.infosys.View
 
-import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Uri
@@ -13,17 +12,15 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.innovat.Database.AppDatabase
-import com.example.innovat.Model.DataResponse
+import com.example.infosys.Database.AppDatabase
+import com.example.infosys.Model.DataResponse
 
-import com.example.innovat.R
-import com.example.innovat.ViewModel.CanadaViewModel
-import com.example.innovat.databinding.FragmentInnovatBinding
+import com.example.infosys.R
+import com.example.infosys.ViewModel.CanadaViewModel
+import com.example.infosys.databinding.FragmentInnovatBinding
 import org.koin.android.viewmodel.ext.android.getViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

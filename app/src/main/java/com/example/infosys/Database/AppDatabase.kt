@@ -1,4 +1,4 @@
-package com.example.innovat.Database
+package com.example.infosys.Database
 
 import android.content.Context
 
@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 
 import androidx.room.Database
 import androidx.room.TypeConverters
-import com.example.innovat.Model.DataResponse
+import com.example.infosys.Model.DataResponse
 
 
 @Database(

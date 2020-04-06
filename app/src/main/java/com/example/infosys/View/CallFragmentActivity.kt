@@ -1,8 +1,8 @@
-package com.example.innovat.View
+package com.example.infosys.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.innovat.R
+import com.example.infosys.R
 
 class CallFragmentActivity : AppCompatActivity() {
 

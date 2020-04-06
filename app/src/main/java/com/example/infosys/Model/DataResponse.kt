@@ -1,4 +1,4 @@
-package com.example.innovat.Model
+package com.example.infosys.Model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

@@ -1,7 +1,7 @@
-package com.example.innovat.Repository
+package com.example.infosys.Repository
 
-import com.example.innovat.Model.DataResponse
-import com.example.innovat.Network.NetworkApi
+import com.example.infosys.Model.DataResponse
+import com.example.infosys.Network.NetworkApi
 import retrofit2.Call
 import retrofit2.Response
 import java.lang.Exception

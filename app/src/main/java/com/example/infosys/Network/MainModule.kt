@@ -1,7 +1,7 @@
-package com.example.innovat.Network
+package com.example.infosys.Network
 
-import com.example.innovat.Repository.DataRepository
-import com.example.innovat.ViewModel.CanadaViewModel
+import com.example.infosys.Repository.DataRepository
+import com.example.infosys.ViewModel.CanadaViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.viewmodel.ext.koin.viewModel

@@ -1,9 +1,8 @@
-package com.example.innovat.Database
+package com.example.infosys.Database
 
 import androidx.room.*
-import com.example.innovat.Model.DataResponse
-import com.example.innovat.Model.RowResponse
-import io.reactivex.Single
+import com.example.infosys.Model.DataResponse
+import com.example.infosys.Model.RowResponse
 
 
 @Dao

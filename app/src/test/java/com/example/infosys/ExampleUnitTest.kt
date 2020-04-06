@@ -1,26 +1,22 @@
-package com.example.innovat
+package com.example.infosys
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.innovat.Model.DataResponse
-import com.example.innovat.Network.mainModule
-import com.example.innovat.Repository.DataRepository
-import com.example.innovat.ViewModel.CanadaViewModel
+import com.example.infosys.Model.DataResponse
+import com.example.infosys.Network.mainModule
+import com.example.infosys.Repository.DataRepository
+import com.example.infosys.ViewModel.CanadaViewModel
 import io.reactivex.Observer
 import org.junit.Assert
 import org.junit.Test
 
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Rule
-import org.koin.android.ext.android.startKoin
 import org.koin.dsl.module.applicationContext
 import org.koin.standalone.StandAloneContext.startKoin
 import org.koin.standalone.inject
 import org.koin.test.KoinTest
 import org.mockito.Mock
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import java.util.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).
