@@ -61,14 +61,14 @@ class DataViewHolder constructor(itemView: View, binding: AdapterLayBinding) :
         }
 
         val options =
-            RequestOptions().placeholder(R.drawable.innovatepic).error(R.drawable.innovatepic);
+            RequestOptions().placeholder(R.drawable.infosys_logo).error(R.drawable.infosys_logo);
 
         if (imageHref != null) {
             Glide.with(context)
                 .load(imageHref).apply(options)
                 .into(mBinding.titleImg)
         } else {
-            mBinding.titleImg.setImageResource(R.drawable.innovatepic)
+            mBinding.titleImg.setImageResource(R.drawable.infosys_logo)
         }
 
 

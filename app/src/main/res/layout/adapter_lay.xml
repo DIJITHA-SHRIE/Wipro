@@ -4,7 +4,6 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/white"
         app:cardElevation="3dp"
         android:layout_margin="3dp"
         android:id="@+id/card_data">
@@ -13,6 +12,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="3dp"
+    android:background="@drawable/adapterbackground"
 
     >
     <LinearLayout
@@ -47,7 +47,7 @@
         android:layout_height="match_parent"
         android:id="@+id/title_img"
         android:layout_weight="0.5"
-        android:src="@drawable/innovatepic"
+        android:src="@drawable/infosys_logo"
         />
 
 </LinearLayout>
