@@ -16,27 +16,21 @@ import com.example.infosys.R
 
 class CallFragmentActivity : AppCompatActivity() {
 
-    var isConnected:Boolean = true
-    var monitoringConnectivity:Boolean = true
+    var isConnected: Boolean = true
+    var monitoringConnectivity: Boolean = true
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_call_fragment)
 
-        if(savedInstanceState == null){
-        val fragment = InnovatFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.details_fragment, fragment).commit()
+        if (savedInstanceState == null) {
+            val fragment = InnovatFragment()
+            supportFragmentManager.beginTransaction().replace(R.id.details_fragment, fragment)
+                .commit()
         }
 
     }
-
-
-
-
-
-
-
 
 
 }

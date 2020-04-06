@@ -38,14 +38,14 @@ private const val ARG_PARAM2 = "param2"
  * Use the [InnovatFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
-    var isConnected:Boolean = false
-    var monitoringConnectivity:Boolean = false
+class InnovatFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
+    var isConnected: Boolean = false
+    var monitoringConnectivity: Boolean = false
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        Log.i("onActivityCreated","onActivityCreated")
+        Log.i("onActivityCreated", "onActivityCreated")
 
         if (isOnline(activity!!)) {
 
@@ -120,8 +120,8 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
                 val connectivityManager =
                     context!!.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
                 val networkInfo = connectivityManager.activeNetworkInfo
-                isConnected =  networkInfo != null && networkInfo.isConnected
-                if(!isConnected){
+                isConnected = networkInfo != null && networkInfo.isConnected
+                if (!isConnected) {
                     connectivityManager.registerNetworkCallback(
                         NetworkRequest.Builder()
                             .addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
@@ -139,7 +139,7 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("onViewCreated","onViewCreated");
+        Log.i("onViewCreated", "onViewCreated");
     }
 
     // TODO: Rename and change types of parameters
@@ -165,18 +165,18 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
         }
         canadaViewModel = getViewModel<CanadaViewModel>()
 
-        Log.i("onCreate","onCreate")
+        Log.i("onCreate", "onCreate")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.i("onCreateView","onCreateView")
+        Log.i("onCreateView", "onCreateView")
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_innovat, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_innovat, container, false)
         binding.setLifecycleOwner(this)
-         db = AppDatabase(activity!!)
+        db = AppDatabase(activity!!)
 
         binding.canadaRecyclerView!!.layoutManager = LinearLayoutManager(
             activity,
@@ -190,8 +190,6 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
             android.R.color.holo_blue_dark
         )
         // check the internet connection
-
-
 
 
         return binding.root
@@ -221,9 +219,9 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
         listener?.onFragmentInteraction(uri)
     }
 
-   override fun onAttach(context: Context) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
-       activity = context
+        activity = context
 
     }
 
@@ -268,16 +266,17 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
             }
     }
 
-    private val connectivityCallback: ConnectivityManager.NetworkCallback = object : ConnectivityManager.NetworkCallback() {
-        override fun onAvailable(network: Network) {
-            isConnected = true
+    private val connectivityCallback: ConnectivityManager.NetworkCallback =
+        object : ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: Network) {
+                isConnected = true
 
-            Log.i("Connected","Connected")
+                Log.i("Connected", "Connected")
 
 
-            /*val intent = Intent(context,CallFragmentActivity::class.java)
-            context!!.startActivity(intent)
-            getActivity()!!.finish()*/
+                /*val intent = Intent(context,CallFragmentActivity::class.java)
+                context!!.startActivity(intent)
+                getActivity()!!.finish()*/
 
 /*
             var ft : FragmentTransaction = fragmentManager!!.beginTransaction()
@@ -286,17 +285,17 @@ class InnovatFragment : Fragment(),SwipeRefreshLayout.OnRefreshListener{
             }
             ft.detach(this@InnovatFragment).attach(this@InnovatFragment).commit()*/
 
-            fragmentManager!!.beginTransaction().replace(R.id.details_fragment, InnovatFragment()).commit()
+                fragmentManager!!.beginTransaction()
+                    .replace(R.id.details_fragment, InnovatFragment()).commit()
 
 
+            }
 
+            override fun onLost(network: Network) {
+                isConnected = false
+                Log.i("NotConnected", "NotConnected")
+            }
         }
-
-        override fun onLost(network: Network) {
-            isConnected = false
-            Log.i("NotConnected","NotConnected")
-        }
-    }
 
 
 }

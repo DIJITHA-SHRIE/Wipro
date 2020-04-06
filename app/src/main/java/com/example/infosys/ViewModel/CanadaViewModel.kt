@@ -29,14 +29,11 @@ class CanadaViewModel(val dataRepository: DataRepository) : ViewModel(), KoinCom
 
                 canadaResponseData.value = data
 
-
             }
-
             override fun onFailure(message: String) {
                 Log.i("ThrowableData", message)
                 //REQUEST FAILED
             }
-
             override fun onToast(error: String) {
                 toastError.value = error
             }
