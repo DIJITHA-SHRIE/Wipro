@@ -1,7 +1,7 @@
 package com.example.infosys.Network
 
 import com.example.infosys.Repository.DataRepository
-import com.example.infosys.ViewModel.CanadaViewModel
+import com.example.infosys.ViewModel.CountryViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.viewmodel.ext.koin.viewModel
@@ -17,7 +17,7 @@ val mainModule = module {
 
     single { createWebService() }
 
-    viewModel { CanadaViewModel(get()) }
+    viewModel { CountryViewModel(get()) }
 
 }
 

@@ -10,21 +10,17 @@ import kotlin.collections.ArrayList
 
 class DataTypeConverter {
     val gson = Gson()
-    @TypeConverter
-    fun stringToList(data: String?): ArrayList<RowResponse> {
+    @TypeConverter fun stringToList(data: String?): ArrayList<RowResponse> {
         if (data == null) {
             return EMPTY_LIST as ArrayList<RowResponse>
         }
 
-        val listType = object : TypeToken<ArrayList<RowResponse>>() {
-
-        }.type
+        val listType = object : TypeToken<ArrayList<RowResponse>>() {}.type
 
         return gson.fromJson(data, listType)
     }
 
-    @TypeConverter
-    fun ListToString(someObjects: ArrayList<RowResponse>): String {
+    @TypeConverter fun ListToString(someObjects: ArrayList<RowResponse>): String {
         return gson.toJson(someObjects)
     }
 }

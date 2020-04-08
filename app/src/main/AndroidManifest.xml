@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name="com.example.infosys.Network.MainApplication"
+        android:name="com.example.infosys.View.MainApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -14,8 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.infosys.View.MainActivity"></activity>
-        <activity android:name="com.example.infosys.View.CallFragmentActivity">
+        <activity android:name="com.example.infosys.View.Activity.MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

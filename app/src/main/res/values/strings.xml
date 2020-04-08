@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Infosys</string>
+    <string name="title">Title</string>
+    <string name="about">About Canada</string>
+    <string name="no_internet">No Internet Available, please try to connect  once to store offline </string>
 
 </resources>

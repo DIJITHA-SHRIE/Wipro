@@ -6,7 +6,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".View.InnovatFragment"
+        tools:context=".View.Fragment.InnovatFragment"
         android:orientation="vertical"
         android:background="@color/white">
 
@@ -14,10 +14,10 @@
             android:id="@+id/stat_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:text="About Canada"
-            android:textSize="15sp"
+            android:layout_marginLeft="@dimen/margin"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/about"
+            android:textSize="@dimen/fontSize_large"
             android:fontFamily="sans-serif-black"
             android:textColor="@color/black"
             android:visibility="gone"
@@ -32,8 +32,7 @@
                 android:id="@+id/canada_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
-                android:layout_margin="3dp"
+                android:layout_margin="@dimen/margin_all"
                 />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
@@ -44,9 +43,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/margin_top"
             android:visibility="gone"
-
             />
 
     </RelativeLayout>

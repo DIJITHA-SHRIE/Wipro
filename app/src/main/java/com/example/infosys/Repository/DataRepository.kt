@@ -12,25 +12,17 @@ class DataRepository(val networkApi: NetworkApi) {
         networkApi.getCanadaApi().enqueue(object : retrofit2.Callback<DataResponse> {
             override fun onFailure(call: Call<DataResponse>, t: Throwable) {
                 canadaData.onFailure(t.localizedMessage)
-
             }
 
             override fun onResponse(call: Call<DataResponse>, response: Response<DataResponse>) {
                 try {
                     canadaData.onSuccess(response.body() as DataResponse)
                 } catch (e: Exception) {
-                    //canadaData.onToast("Url Not Found!! please try after sometime")
                     canadaData.onToast(e.message.toString())
-
                 }
-
-
             }
-
         })
-
     }
-
 
     interface CanadaData {
         fun onSuccess(data: DataResponse)

@@ -7,13 +7,11 @@ import com.example.infosys.Model.RowResponse
 
 @Dao
 interface RoomDao {
-
     @Query("SELECT * FROM canada_offline_storage")
     fun getAll(): DataResponse
 
     @Query("SELECT COUNT(*) FROM canada_offline_storage")
     fun getCount(): Int
-
 
     @Insert
     fun insertAll(vararg todo: DataResponse)
