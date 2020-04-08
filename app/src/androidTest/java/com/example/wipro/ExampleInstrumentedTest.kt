@@ -1,4 +1,4 @@
-package com.example.infosys
+package com.example.wipro
 
 import android.content.Context
 import android.net.ConnectivityManager
@@ -8,7 +8,7 @@ import androidx.test.espresso.Espresso
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
-import com.example.infosys.View.Fragment.InnovatFragment
+import com.example.wipro.View.Fragment.InnovatFragment
 import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
@@ -30,7 +30,7 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.example.infosys", appContext.packageName)
+        assertEquals("com.example.wipro", appContext.packageName)
     }
 
     // Test to check the number of items in the adapter

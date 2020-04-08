@@ -1,7 +1,7 @@
-package com.example.infosys.Network
+package com.example.wipro.Network
 
-import com.example.infosys.Repository.DataRepository
-import com.example.infosys.ViewModel.CountryViewModel
+import com.example.wipro.Repository.DataRepository
+import com.example.wipro.ViewModel.CountryViewModel
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.viewmodel.ext.koin.viewModel

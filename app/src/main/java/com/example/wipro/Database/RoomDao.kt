@@ -1,8 +1,8 @@
-package com.example.infosys.Database
+package com.example.wipro.Database
 
 import androidx.room.*
-import com.example.infosys.Model.DataResponse
-import com.example.infosys.Model.RowResponse
+import com.example.wipro.Model.DataResponse
+import com.example.wipro.Model.RowResponse
 
 
 @Dao

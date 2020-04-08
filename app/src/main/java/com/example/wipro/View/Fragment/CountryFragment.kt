@@ -1,4 +1,4 @@
-package com.example.infosys.View.Fragment
+package com.example.wipro.View.Fragment
 
 import android.content.Context
 import android.net.*
@@ -13,12 +13,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.infosys.Database.AppDatabase
-import com.example.infosys.Model.DataResponse
-import com.example.infosys.R
-import com.example.infosys.View.Adapter.DataAdapter
-import com.example.infosys.ViewModel.CountryViewModel
-import com.example.infosys.databinding.FragmentInnovatBinding
+import com.example.wipro.Database.AppDatabase
+import com.example.wipro.Model.DataResponse
+import com.example.wipro.R
+import com.example.wipro.View.Adapter.DataAdapter
+import com.example.wipro.ViewModel.CountryViewModel
+import com.example.wipro.databinding.FragmentInnovatBinding
 import org.koin.android.viewmodel.ext.android.getViewModel
 
 

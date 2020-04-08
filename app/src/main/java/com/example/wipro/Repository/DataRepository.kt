@@ -1,7 +1,7 @@
-package com.example.infosys.Repository
+package com.example.wipro.Repository
 
-import com.example.infosys.Model.DataResponse
-import com.example.infosys.Network.NetworkApi
+import com.example.wipro.Model.DataResponse
+import com.example.wipro.Network.NetworkApi
 import retrofit2.Call
 import retrofit2.Response
 import java.lang.Exception

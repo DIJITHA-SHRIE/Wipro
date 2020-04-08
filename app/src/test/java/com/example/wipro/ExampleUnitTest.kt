@@ -1,10 +1,10 @@
-package com.example.infosys
+package com.example.wipro
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.infosys.Model.DataResponse
-import com.example.infosys.Network.mainModule
-import com.example.infosys.Repository.DataRepository
-import com.example.infosys.ViewModel.CountryViewModel
+import com.example.wipro.Model.DataResponse
+import com.example.wipro.Network.mainModule
+import com.example.wipro.Repository.DataRepository
+import com.example.wipro.ViewModel.CountryViewModel
 import io.reactivex.Observer
 import org.hamcrest.CoreMatchers
 import org.junit.Assert

@@ -1,4 +1,4 @@
-package com.example.infosys.View.Adapter
+package com.example.wipro.View.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.infosys.Model.RowResponse
-import com.example.infosys.R
-import com.example.infosys.databinding.AdapterLayBinding
+import com.example.wipro.Model.RowResponse
+import com.example.wipro.R
+import com.example.wipro.databinding.AdapterLayBinding
 
 class DataAdapter(val items: ArrayList<RowResponse>, val context: Context) : RecyclerView.Adapter<DataViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
@@ -54,14 +54,14 @@ class DataViewHolder constructor(itemView: View, binding: AdapterLayBinding) : R
             }
 
             val options =
-                RequestOptions().placeholder(R.drawable.infosys_logo).error(R.drawable.infosys_logo);
+                RequestOptions().placeholder(R.drawable.wipro_logo).error(R.drawable.wipro_logo);
 
             if (imageHref != null) {
                 Glide.with(context)
                     .load(imageHref).apply(options)
                     .into(mBinding.titleImg)
             } else {
-                mBinding.titleImg.setImageResource(R.drawable.infosys_logo)
+                mBinding.titleImg.setImageResource(R.drawable.wipro_logo)
             }
     }
 }

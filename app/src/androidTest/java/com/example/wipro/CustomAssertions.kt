@@ -1,4 +1,4 @@
-package com.example.infosys
+package com.example.wipro
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

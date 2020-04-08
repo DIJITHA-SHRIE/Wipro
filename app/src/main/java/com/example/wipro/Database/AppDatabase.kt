@@ -1,11 +1,11 @@
-package com.example.infosys.Database
+package com.example.wipro.Database
 
 import android.content.Context
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.Database
 import androidx.room.TypeConverters
-import com.example.infosys.Model.DataResponse
+import com.example.wipro.Model.DataResponse
 
 
 @Database(entities = [DataResponse::class], version = 1)

@@ -1,7 +1,7 @@
-package com.example.infosys.Database
+package com.example.wipro.Database
 
 import androidx.room.TypeConverter
-import com.example.infosys.Model.RowResponse
+import com.example.wipro.Model.RowResponse
 import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
 import java.util.Collections.EMPTY_LIST

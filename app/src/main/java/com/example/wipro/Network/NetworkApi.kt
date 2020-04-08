@@ -1,6 +1,6 @@
-package com.example.infosys.Network
+package com.example.wipro.Network
 
-import com.example.infosys.Model.DataResponse
+import com.example.wipro.Model.DataResponse
 import retrofit2.Call
 import retrofit2.http.GET
 

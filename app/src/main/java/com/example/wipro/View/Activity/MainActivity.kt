@@ -1,9 +1,9 @@
-package com.example.infosys.View.Activity
+package com.example.wipro.View.Activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.example.infosys.R
-import com.example.infosys.View.Fragment.InnovatFragment
+import com.example.wipro.R
+import com.example.wipro.View.Fragment.InnovatFragment
 
 
 class MainActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.infosys.Model
+package com.example.wipro.Model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

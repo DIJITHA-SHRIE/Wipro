@@ -1,10 +1,9 @@
-package com.example.infosys.ViewModel
+package com.example.wipro.ViewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.infosys.Model.DataResponse
-import com.example.infosys.Repository.DataRepository
+import com.example.wipro.Model.DataResponse
+import com.example.wipro.Repository.DataRepository
 import org.koin.standalone.KoinComponent
 
 

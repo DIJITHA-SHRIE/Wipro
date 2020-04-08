@@ -46,7 +46,7 @@
         android:layout_height="match_parent"
         android:id="@+id/title_img"
         android:layout_weight="0.5"
-        android:src="@drawable/infosys_logo"
+        android:src="@drawable/wipro_logo"
         />
 
 </LinearLayout>
